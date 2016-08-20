@@ -6,10 +6,18 @@
 
 
     <services>
-        <service id="trivago.tas.config" class="Trivago\Tas\Config">
+        <service id="trivago.tas.config" class="Trivago\Tas\Config" public="false">
             <factory class="AppBundle\Trivago\ConfigFactory" method="createConfig"/>
             <argument>%trivago_api_access_id%</argument>
             <argument>%trivago_api_secret_key%</argument>
+        </service>
+
+        <service class="Trivago\Tas\Tas" id="trivago.tas.client">
+            <argument id="trivago.tas.config" type="service"/>
+        </service>
+
+        <service class="AppBundle\Resolver\LocationResolver" id="trivago.location_resolver">
+            <argument id="trivago.tas.client" type="service"/>
         </service>
     </services>
 

@@ -1,0 +1,74 @@
+.tile {
+  width: 200px;
+  height: 200px;
+
+  background-size: 200px 200px;
+
+  input,
+  h4,
+  h5 {
+    text-align: center;
+    color: white;
+    width: 100%;
+    font-weight: bold;
+  }
+
+  input,
+  h4 {
+    font-size: 32px;
+  }
+
+  input[name="nights"],
+  h5 {
+    font-size: 24px;
+  }
+
+  .night-wrapper {
+    position: relative;
+    width: 50px;
+
+    input {
+      position: absolute;
+      top: -4px;
+    }
+  }
+
+  input {
+    margin: 10px 0;
+  }
+
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .flex-between {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .rating-row {
+    justify-content: center;
+
+    h4 {
+      width: auto;
+      margin-left: 20px;
+    }
+  }
+
+  .glyphicon {
+    color: #fff;
+  }
+
+  button,
+  input {
+    border: none;
+    border-color: transparent;
+    background-color: transparent;
+  }
+
+  [name="nights"] {
+    width: 40px;
+  }
+}

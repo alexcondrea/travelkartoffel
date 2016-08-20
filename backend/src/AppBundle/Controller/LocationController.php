@@ -5,27 +5,31 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Trivago\Tas\Config;
 use Trivago\Tas\Request\LocationsRequest;
+use Trivago\Tas\Response\Locations\Location;
 use Trivago\Tas\Tas;
 
-class HotelController extends Controller
+class LocationController extends Controller
 {
     /**
-     * @Route("/kartoffel/api/search", name="trivago_kartoffel_search")
+     * @Route("/kartoffel/api/search/location", name="trivago_kartoffel_location_search")
      */
     public function indexAction(Request $request)
     {
-        $config = $this->get('trivago.tas.config');
-
-        $tas = new Tas($config);
-
         $searchTerm = $request->get('q', 'Berlin');
 
         try {
-            $locations = $tas->getLocations(new LocationsRequest($searchTerm));
+            $locations = $this->get('trivago.tas.client')
+                ->getLocations(new LocationsRequest($searchTerm));
+
         } catch (\Trivago\Tas\Response\ProblemException $e) {
             return $this->createNotFoundException('API error: ' . $e->getMessage());
+        }
+
+        if($request->query->getBoolean('only_city', true)) {
+            $locations = array_values((array_filter($locations->toArray(), function (Location $location) {
+                return $location->getType() == 'path';
+            })));
         }
 
         $locs = [];
