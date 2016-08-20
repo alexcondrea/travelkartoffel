@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Utils\ParameterUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,11 +23,8 @@ class SuggestController extends Controller
      */
     public function hotelProxyAction(Request $request)
     {
-        $keys = array_merge(['currency' => 'EUR'],
-            array_intersect_key($request->query->all(), array_fill_keys(static::PARAMETERS, 1))
-        );
+        $keys = ParameterUtils::normalizer($request->query->all());
 
-        // resolve path name to id
         if(isset($keys['path']) && !is_numeric($keys['path'])) {
             if(null === $location = $this->get('trivago.location_resolver')->resolveLocationString($keys['path'])) {
                 return $this->createNotFoundException('Location not found', $request->query->get('path'));

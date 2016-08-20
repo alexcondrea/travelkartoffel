@@ -24,6 +24,7 @@ http://company.trivago.com/hackathon-2016/
  Proxy for hotel collection with path resolver
  
 ```
+/kartoffel/api/search/hotel-collection?path=8514&start_date=2016-08-20&end_date=2016-08-25
 /kartoffel/api/search/hotel-collection?path=Berlin
 /kartoffel/api/search/hotel-collection?path=8514
  ```
