@@ -14,6 +14,15 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $content = file_get_contents(realpath($this->container->getParameter('kernel.root_dir') . '/../../frontend/index.html'));
+        return new Response($content);
+    }
+
+    /**
+     * @Route("/routes", name="trivago_kartoffel_routes")
+     */
+    public function routesAction(Request $request)
+    {
         $routes = [];
         foreach($this->get('router')->getRouteCollection() as $name => $route) {
             /** @var $route \Symfony\Component\Routing\Route */
