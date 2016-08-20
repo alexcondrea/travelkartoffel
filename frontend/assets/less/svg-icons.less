@@ -94,6 +94,44 @@
   flex-direction: row;
 
   justify-content: center;
+
+  :nth-child(1) {
+    display: block !important;
+  }
+
+  .star {
+    display: none;
+  }
+
+  &.star_2 {
+    :nth-child(2) {
+      display: block !important;    
+    }
+  }
+
+  &.star_3 {
+    :nth-child(2),
+    :nth-child(3) {
+      display: block !important;    
+    }
+  }
+
+  &.star_4 {
+    :nth-child(2),
+    :nth-child(3),
+    :nth-child(4) {
+      display: block !important;    
+    }
+  }
+
+  &.star_5 {
+    :nth-child(2),
+    :nth-child(3),
+    :nth-child(4),
+    :nth-child(5) {
+      display: block !important;    
+    }
+  }
 }
 
 .star {
