@@ -4,30 +4,30 @@ namespace AppBundle\Utils;
 
 class ParameterUtils
 {
-    const PARAMETERS = [
-        'path',
-        'item',
-        'start_date',
-        'end_date',
-        'room_type',
-        'currency',
-        'category',
-        'limit',
-        'offset',
-        'order',
-        'rating_class',
-        'hotel_name',
-        'max_price'
-    ];
-
     /**
      * @param array $parameter
      * @return array
      */
     public static function normalizer(array $parameter)
     {
+        $parameters = [
+            'path',
+            'item',
+            'start_date',
+            'end_date',
+            'room_type',
+            'currency',
+            'category',
+            'limit',
+            'offset',
+            'order',
+            'rating_class',
+            'hotel_name',
+            'max_price'
+        ];
+
         $keys = array_merge(['currency' => 'EUR'],
-            array_intersect_key($parameter, array_fill_keys(static::PARAMETERS, 1))
+            array_intersect_key($parameter, array_fill_keys($parameters, 1))
         );
 
         // resolve path name to id
