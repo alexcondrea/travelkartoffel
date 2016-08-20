@@ -14,7 +14,12 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $content = file_get_contents(realpath($this->container->getParameter('kernel.root_dir') . '/../../frontend/index.html'));
+        $path = dirname(dirname($this->container->getParameter('kernel.root_dir'))) . '/frontend/index.html';
+        if (!is_file($path)) {
+            throw $this->createNotFoundException('file not found ' . $path);
+        }
+
+        $content = file_get_contents($path);
         return new Response($content);
     }
 
