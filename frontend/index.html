@@ -53,6 +53,44 @@
         </div>
     </script>
 
+    <script id="tile-template-empty" type="text/x-handlebars-template">
+        <div class="slick center" style="width: 200px;">
+            <div class="tile is-active" style="background-color: #f48f00;">
+                <div class="content-active">
+                    <div class="input-wrapper is-empty">
+                        <input class="typeahead" type="text" name="location" placeholder="Enter City" />
+                        <div class="icon-pencil glyphicon glyphicon-pencil"></div>
+                    </div>
+
+                    <div class="flex-row flex-between">
+                        <button type="button" aria-label="Decrease" data-role="decrease">
+                            <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        </button>
+                        <div class="flex-row">
+                            <div class="night-wrapper">
+                                <input type="text" name="nights" placeholder="0" />
+                            </div>
+                            <h5>nights</h5>
+                        </div>
+                        <button class="" aria-label="Increase" data-role="increase">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                        </button>
+                    </div>
+
+                    <div class="flex-row flex-between rating-row">
+                        <div class="rating"><div class="rating_na"></div></div>
+                        <h4>0 €</h4>
+                    </div>
+                </div>
+                <div class="content-add">
+                    <button aria-label="Increase" data-role="activate">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </script>
+
 
 </head>
 <body>
@@ -89,37 +127,34 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="hotel-slot">
-    <div class="container">
-        <div class="row">
+        <div class="container">
+            <div class="row">
 
 
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <h1>Tripvago</h1>
-
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <h1>Tripvago</h1>
+                </div>
             </div>
-        </div>
 
-         <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <div class="input-group date" id="startDate">
-                        <input type="text" class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+             <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="input-group date" id="startDate">
+                            <input type="text" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
+        </div>
     </div>
 
-    <div class="hotel-collection-result">
-        <div class="container">
-            <div class="row" id="target"></div>
-        </div>
+    <div class="container-fluid">
+        <div class="hotel-collection-result"></div>
     </div>
 
 

@@ -81,6 +81,22 @@ window.addEventListener("keydown", function(e) {
     }
 }, false);
 
+var fillInital = function() {
+    var AMOUNT = 3;
+    var i = 0;
+    var source = $('#tile-template-empty').html();
+    var emptyTile = Handlebars.compile(source);
+    var $item = emptyTile();
+
+    for(i = 0; i < AMOUNT; i++) {
+        $('.hotel-collection-result').append($item);
+    }
+    $('.hotel-collection-result .tile:last').removeClass('is-active');
+}
+fillInital();
+
+//fillColumns();
+
 $('.center').slick({
     centerMode: true,
     centerPadding: '200px',
@@ -93,5 +109,3 @@ $('.center').slick({
     vertical: true,
     verticalSwiping: true
 });
-
-fillColumns();
