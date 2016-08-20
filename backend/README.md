@@ -28,3 +28,12 @@ http://tripvago.ga/kartoffel/api/search/hotel-collection?path=8514&start_date=20
 http://tripvago.ga/kartoffel/api/search/hotel-collection?path=Berlin
 http://tripvago.ga/kartoffel/api/search/hotel-collection?path=8514
  ```
+ 
+ ### Hotel collection
+
+Predefined route / step
+ 
+```
+http://tripvago.ga/kartoffel/api/storage
+http://tripvago.ga/kartoffel/api/storage/berlin-leipzig-dortmund
+```

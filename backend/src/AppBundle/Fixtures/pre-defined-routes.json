@@ -1,0 +1,59 @@
+[
+  {
+    "id": "berlin-leipzig-dortmund",
+    "description": "Beschreibung Berlin-Leipzig-Dortmund",
+    "likes": 34,
+    "steps": [
+      {
+        "location": "Berlin",
+        "nights": 2
+      },
+      {
+        "location": "Leipzig",
+        "nights": 5
+      },
+      {
+        "location": "Dortmund",
+        "nights": 3
+      }
+    ]
+  },
+  {
+    "id": "berlin-leipzig-dortmund",
+    "description": "Beschreibung Berlin-Leipzig-Dortmund",
+    "likes": 34,
+    "steps": [
+      {
+        "location": "Berlin",
+        "nights": 4
+      },
+      {
+        "location": "Leipzig",
+        "nights": 2
+      },
+      {
+        "location": "Dortmund",
+        "nights": 5
+      }
+    ]
+  },
+  {
+    "id": "berlin-freiburg-duisburg",
+    "description": "Beschreibung Berlin-Freiburg-Duisburg",
+    "likes": 34,
+    "steps": [
+      {
+        "location": "Berlin",
+        "nights": 1
+      },
+      {
+        "location": "Freiburg",
+        "nights": 3
+      },
+      {
+        "location": "Duisburg",
+        "nights": 6
+      }
+    ]
+  }
+]
