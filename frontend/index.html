@@ -202,20 +202,35 @@
             format: 'YYYY-MM-DD'
         });
 
+        var getRatingClass = function(value) {
+            var rc = 0;
+
+            if (value > 80) {
+                rc = 4;
+            } else if (value > 76 && value < 80) {
+                rc = 3;
+            } else if (value > 74 && value < 76) {
+                rc = 2;
+            } else if (value > 70 && value < 74) {
+                rc = 1;
+            }
+
+            return rc;
+        };
+
         var tileSource = $("#tile-template").html();
         var tiletemplate = Handlebars.compile(tileSource);
 
         data.items.forEach(function(item) {
-
             var info = {
                 hotelName: item.name,
                 locationName: item.city,
                 nights: 3,
+                rating: getRatingClass(item.ratingValue),
                 imageUrl: item.mainImage.extraLarge,
                 priceFormatte: item.deals[0].price.formatted,
                 stars: 'star_' + item.category
             };
-
             var $tile = tiletemplate(info);
 
             $('#target').append($tile);
