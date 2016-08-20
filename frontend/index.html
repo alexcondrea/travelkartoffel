@@ -17,38 +17,38 @@
     <link rel="stylesheet" href="build/style.css">
 
     <script id="tile-template" type="text/x-handlebars-template">
-            <div class="tile" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url({{imageUrl}})">
-                <div class="input-wrapper">
-                    <input type="text" name="location" placeholder="Location" value="{{locationName}}" />
-                    <div class="icon-pencil glyphicon glyphicon-pencil"></div>
-                </div>
-                <div class="flex-row flex-between">
-                    <button type="button" aria-label="Decrease" data-role="decrease">
-                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                    </button>
-                    <div class="flex-row">
-                        <div class="night-wrapper">
-                            <input type="text" name="nights" placeholder="0" value="{{nights}}" />
-                        </div>
-                        <h5>nights</h5>
-                    </div>
-                    <button class="" aria-label="Increase" data-role="increase">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    </button>
-                </div>
-                <div class="flex-row flex-between rating-row">
-                    <div class="rating"><div class="rating_{{rating}}"></div></div>
-                    <h4 class="text-center price">{{priceFormatte}}</h4>
-                </div>
-                <div class="star-wrapper {{stars}}">
-                    <div class="star"></div>
-                    <div class="star"></div>
-                    <div class="star"></div>
-                    <div class="star"></div>
-                    <div class="star"></div>
-                </div>
-                <h6>{{hotelName}}</h6>
+        <div class="tile" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url({{imageUrl}})">
+            <div class="input-wrapper">
+                <input type="text" name="location" placeholder="Location" value="{{locationName}}" />
+                <div class="icon-pencil glyphicon glyphicon-pencil"></div>
             </div>
+            <div class="flex-row flex-between">
+                <button type="button" aria-label="Decrease" data-role="decrease">
+                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                </button>
+                <div class="flex-row">
+                    <div class="night-wrapper">
+                        <input type="text" name="nights" placeholder="0" value="{{nights}}" />
+                    </div>
+                    <h5>nights</h5>
+                </div>
+                <button class="" aria-label="Increase" data-role="increase">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="flex-row flex-between rating-row">
+                <div class="rating"><div class="rating_{{rating}}"></div></div>
+                <h4 class="text-center price">{{priceFormatte}}</h4>
+            </div>
+            <div class="star-wrapper {{stars}}">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
+            <h6>{{hotelName}}</h6>
+        </div>
     </script>
 
     <script id="tile-template-empty" type="text/x-handlebars-template">
@@ -157,9 +157,9 @@
     </div>
 
     <div class="container-fluid">
-    <div class="row">
-        <div class="hotel-collection-result"></div>
-</div>
+        <div class="row">
+            <div class="hotel-collection-result"></div>
+        </div>
     </div>
 
 

@@ -82,14 +82,21 @@ window.addEventListener("keydown", function(e) {
 }, false);
 
 var fillInital = function() {
-    var AMOUNT = 3;
+    var AMOUNT = 11;
+    var ROWS = 3;
     var i = 0;
-    var source = $('#tile-template-empty').html();
+    var k = 0;
+    var source = $('#tile-template').html();
     var emptyTile = Handlebars.compile(source);
     var $item = emptyTile();
+    var $tmp = '';
 
-    for(i = 0; i < AMOUNT; i++) {
-        $('.hotel-collection-result').append($item);
+    for(i = 0; i < ROWS; i++) {
+        $tmp = $('<div class="slick center col-md-12" style="width: 200px;"></div>');
+        for(k = 0; k < AMOUNT; k++) {
+            $tmp.append($item);
+        }
+        $('.hotel-collection-result').append($tmp);
     }
     $('.hotel-collection-result .tile:last').removeClass('is-active');
 }
