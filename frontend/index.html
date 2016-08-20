@@ -63,9 +63,25 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <div class="tile">
-                    <h4>Berlin</h4>
-                    <div class="rating rating_0"></div>
+                <div class="tile" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url(http://imgec.trivago.com/itemimages/52/96/52964_v7_isq.jpeg)">
+                    <input type="text" name="location" tabindex="10" placeholder="Location" value="Berlin" />
+
+                    <div class="flex-row flex-between">
+                        <button type="button" aria-label="Decrease">
+                            <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        </button>
+                        <div class="flex-row">
+                            <div class="night-wrapper">
+                                <input type="text" name="nights" tabindex="20" placeholder="0" value="2" />
+                            </div>
+                            <h5>nights</h5>
+                        </div>
+                        <button class="" tabindex="40" aria-label="Increase">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <h4 class="text-center">72€</h4>
+
                     <div class="star-wrapper">
                         <div class="star"></div>
                         <div class="star"></div>
@@ -73,17 +89,34 @@
                         <div class="star"></div>
                         <div class="star"></div>
                     </div>
+
                 </div>
             </div>
 
             <div class="col-sm-6">
-                <div class="tile">
+                <div class="tile" style="background-color: #f48f00;">
                     <input type="text" name="location" tabindex="10" placeholder="Location" />
 
-                    <div class="flex-row">
-                        <button class="btn btn-default" tabindex="30">-</button>
-                        <input type="text" name="nights" tabindex="20" placeholder="nights" />
-                        <button class="btn btn-default" tabindex="40">+</button>
+                    <div class="flex-row flex-between">
+                        <button type="button" aria-label="Decrease">
+                            <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        </button>
+                        <div class="flex-row">
+                            <div class="night-wrapper">
+                                <input type="text" name="nights" tabindex="20" placeholder="0" />
+                            </div>
+                            <h5>nights</h5>
+                        </div>
+                        <button class="" tabindex="40" aria-label="Increase">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                        </button>
+                    </div>
+
+                    <div class="flex-row flex-between rating-empty">
+                        <div class="rating">
+                            <div class="rating_2"></div>
+                        </div>
+                        <h4>0 €</h4>
                     </div>
                 </div>
             </div>
