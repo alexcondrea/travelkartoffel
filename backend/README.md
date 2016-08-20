@@ -15,7 +15,8 @@ http://company.trivago.com/hackathon-2016/
 ### Locations
  
 ```
- /kartoffel/api/search/location?q=Berlin
+/kartoffel/api/search/location?q=Berlin
+/kartoffel/api/search/location?q=Berlin&only_city=0
 ```
   
 ### Hotel collection
