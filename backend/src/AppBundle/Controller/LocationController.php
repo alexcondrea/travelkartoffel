@@ -19,7 +19,7 @@ class LocationController extends Controller
         $searchTerm = $request->get('q', 'Berlin');
 
         try {
-            $locations = $this->get('trivago.tas.client')
+            $locations = $this->get('trivago.api_workaround')
                 ->getLocations(new LocationsRequest($searchTerm));
 
         } catch (\Trivago\Tas\Response\ProblemException $e) {

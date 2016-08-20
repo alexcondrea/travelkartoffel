@@ -19,6 +19,10 @@
         <service class="AppBundle\Resolver\LocationResolver" id="trivago.location_resolver">
             <argument id="trivago.tas.client" type="service"/>
         </service>
+
+        <service class="AppBundle\Trivago\ApiWorkaround" id="trivago.api_workaround">
+            <argument id="trivago.tas.client" type="service"/>
+        </service>
     </services>
 
 </container>
