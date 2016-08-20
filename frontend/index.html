@@ -64,7 +64,10 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="tile" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url(http://imgec.trivago.com/itemimages/52/96/52964_v7_isq.jpeg)">
-                    <input type="text" name="location" tabindex="10" placeholder="Location" value="Berlin" />
+                    <div class="input-wrapper">
+                        <input type="text" name="location" tabindex="10" placeholder="Location" value="Berlin" />
+                        <div class="icon-pencil glyphicon glyphicon-pencil"></div>
+                    </div>
 
                     <div class="flex-row flex-between">
                         <button type="button" aria-label="Decrease">
@@ -96,7 +99,10 @@
 
             <div class="col-sm-6">
                 <div class="tile" style="background-color: #f48f00;">
-                    <input type="text" name="location" tabindex="10" placeholder="Enter City" />
+                    <div class="input-wrapper is-empty">
+                        <input type="text" name="location" tabindex="10" placeholder="Enter City" />
+                        <div class="icon-pencil glyphicon glyphicon-pencil"></div>
+                    </div>
 
                     <div class="flex-row flex-between">
                         <button type="button" aria-label="Decrease">

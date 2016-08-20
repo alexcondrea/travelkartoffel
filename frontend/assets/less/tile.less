@@ -71,4 +71,25 @@
   [name="nights"] {
     width: 40px;
   }
+
+  .input-wrapper {
+    position: relative;
+    padding-left: 10px 0;
+
+    .icon-pencil {
+      position: absolute;
+      display: none;
+      right: 8px;
+      top: 21px;
+    }
+
+    &.is-empty {
+      padding-right: 40px;
+      padding-left: 10px;
+
+      .icon-pencil {
+        display: block;
+      }
+    }
+  }
 }
