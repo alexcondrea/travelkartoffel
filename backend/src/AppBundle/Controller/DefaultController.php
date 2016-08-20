@@ -19,6 +19,22 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/build/{path}", name="trivago_kartoffel_homepage", requirements={"path"=".+"})
+     */
+    public function pathAction($path)
+    {
+        $file = $this->container->getParameter('kernel.root_dir') . '/../../frontend/build/' . $path;
+        if(!is_file($file)) {
+            $this->createNotFoundException('file not found ' . $file);
+        }
+
+        $content = file_get_contents($file);
+
+        return new Response($content);
+
+    }
+
+        /**
      * @Route("/routes", name="trivago_kartoffel_routes")
      */
     public function routesAction(Request $request)
