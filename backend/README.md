@@ -15,8 +15,8 @@ http://company.trivago.com/hackathon-2016/
 ### Locations
  
 ```
-/kartoffel/api/search/location?q=Berlin
-/kartoffel/api/search/location?q=Berlin&only_city=0
+http://tripvago.ga/kartoffel/api/search/location?q=Berlin
+http://tripvago.ga/kartoffel/api/search/location?q=Berlin&only_city=0
 ```
   
 ### Hotel collection
@@ -24,7 +24,7 @@ http://company.trivago.com/hackathon-2016/
  Proxy for hotel collection with path resolver
  
 ```
-/kartoffel/api/search/hotel-collection?path=8514&start_date=2016-08-20&end_date=2016-08-25
-/kartoffel/api/search/hotel-collection?path=Berlin
-/kartoffel/api/search/hotel-collection?path=8514
+http://tripvago.ga/kartoffel/api/search/hotel-collection?path=8514&start_date=2016-08-20&end_date=2016-08-25
+http://tripvago.ga/kartoffel/api/search/hotel-collection?path=Berlin
+http://tripvago.ga/kartoffel/api/search/hotel-collection?path=8514
  ```
