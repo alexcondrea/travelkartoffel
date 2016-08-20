@@ -68,6 +68,7 @@ gulp.task('build-css', function () {
 
 // Default task
 gulp.task('watch', function () {
+    gulp.watch('./index.html', [])
     gulp.watch('assets/js/libs/**/*.js', ['squish-jquery']);
     gulp.watch('assets/js/*.js', ['build-js']);
     gulp.watch('assets/less/**/*.less', ['build-css']);
