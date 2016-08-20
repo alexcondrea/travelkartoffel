@@ -2,6 +2,7 @@
 
 namespace AppBundle\Trivago;
 
+use Psr\Cache\CacheItemPoolInterface;
 use Trivago\Tas\Request\HotelCollectionRequest;
 use Trivago\Tas\Request\LocationsRequest;
 use Trivago\Tas\Response\HotelCollection\HotelCollection;
@@ -20,15 +21,20 @@ class ApiWorkaround
      * @var Tas
      */
     private $tas;
+    /**
+     * @var CacheItemPoolInterface
+     */
+    private $cacheItemPool;
 
     /**
      * ApiWorkaround constructor.
      *
      * @param Tas $tas
      */
-    public function __construct(Tas $tas)
+    public function __construct(Tas $tas, CacheItemPoolInterface $cacheItemPool)
     {
         $this->tas = $tas;
+        $this->cacheItemPool = $cacheItemPool;
     }
 
     /**
@@ -37,9 +43,19 @@ class ApiWorkaround
      * @return array|\Trivago\Tas\Response\HotelCollection\HotelCollection
      */
     public function getHotelCollection(HotelCollectionRequest $request) {
+        $key = md5($request->getPath() . json_encode($request->getQueryParameters()));
+        $cache = $this->cacheItemPool->getItem($key);
+        if ($cache->isHit()) {
+            return $cache->get();
+        }
+
         for ($i = 1; $i <= 4; $i++) {
             $result = $this->tas->getHotelCollection($request);
             if(count($result) != 0) {
+                $this->cacheItemPool->save(
+                    $cache->set($result)->expiresAfter(300)
+                );
+
                 return $result;
             }
         }
@@ -49,9 +65,18 @@ class ApiWorkaround
 
     public function getLocations(LocationsRequest $request)
     {
+        $key = md5($request->getPath() .  json_encode($request->getQueryParameters()));
+        $cache = $this->cacheItemPool->getItem($key);
+        if ($cache->isHit()) {
+            return $cache->get();
+        }
+
         for ($i = 1; $i <= 4; $i++) {
             $result = $this->tas->getLocations($request);
             if (count($result) != 0) {
+                $this->cacheItemPool->save(
+                    $cache->set($result)->expiresAfter(300)
+                );
                 return $result;
             }
         }

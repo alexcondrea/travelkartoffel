@@ -22,6 +22,11 @@
 
         <service class="AppBundle\Trivago\ApiWorkaround" id="trivago.api_workaround">
             <argument id="trivago.tas.client" type="service"/>
+            <argument type="service" id="cache.app"/>
+        </service>
+
+        <service class="AppBundle\Calculator\PriceCalculator" id="trivago.price_calculator">
+            <argument type="service" id="trivago.api_workaround"/>
         </service>
     </services>
 
