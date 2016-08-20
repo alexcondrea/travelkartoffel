@@ -31,7 +31,7 @@ class SearchController extends Controller
         $request = new HotelCollectionRequest($keys);
 
         try {
-            $hotels = $this->get('trivago.tas.client')
+            $hotels = $this->get('trivago.api_workaround')
                 ->getHotelCollection($request);
         } catch (ProblemException $e) {
             return $this->createNotFoundException('API error: ' . $e->getMessage());

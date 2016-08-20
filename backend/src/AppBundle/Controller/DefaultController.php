@@ -24,11 +24,11 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/build/{path}", requirements={"path"=".+"})
+     * @Route("/{folder}/{path}", requirements={"path"=".+", "folder"="assets|build"})
      */
-    public function pathAction($path)
+    public function pathAction($folder, $path)
     {
-        $file = $this->container->getParameter('kernel.root_dir') . '/../../frontend/build/' . $path;
+        $file = $this->container->getParameter('kernel.root_dir') . '/../../frontend/'. $folder .'/' . $path;
         if(!is_file($file)) {
             throw $this->createNotFoundException('file not found ' . $file);
         }

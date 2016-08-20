@@ -11,7 +11,7 @@ var gulp = require('gulp'),
 gulp.task('default', ['watch']);
 
 // Run "gulp server"
-gulp.task('server', ['serve', 'watch']);
+gulp.task('server', ['build', 'serve', 'watch']);
 
 // Minify jQuery Plugins: Run manually with: "gulp squish-jquery"
 gulp.task('squish-jquery', function () {

@@ -5,6 +5,7 @@
 <!--[if IE 9 ]>   <html itemscope itemtype="https://schema.org/" id="ie9" class="ie" lang="en-US"><![endif]-->
 <!--[if gt IE 9]><!--><html itemscope itemtype="https://schema.org/" lang="en-US"><!--<![endif]-->
 <head>
+
     <meta charset="utf-8">
     <title>Tripvago</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -12,93 +13,190 @@
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- default template -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="build/style.css">
+
     <script id="tile-template" type="text/x-handlebars-template">
-    <div class="tile slider center col-md-4" id="slider1" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url({{imageUrl}})">
-        <div class="input-wrapper">
-            <input type="text" name="location" placeholder="Location" value="{{locationName}}" />
-            <div class="icon-pencil glyphicon glyphicon-pencil"></div>
-        </div>
-        <div class="flex-row flex-between">
-            <button type="button" aria-label="Decrease" data-role="decrease">
-            <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-            </button>
-            <div class="flex-row">
-                <div class="night-wrapper">
-                    <input type="text" name="nights" placeholder="0" value="{{nights}}" />
-                </div>
-                <h5>nights</h5>
-            </div>
-            <button class="" aria-label="Increase" data-role="increase">
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            </button>
-        </div>
-        <div class="flex-row flex-between rating-row">
-            <div class="rating"><div class="rating_{{rating}}"></div></div>
-            <h4 class="text-center">{{priceFormat}}</h4>
-        </div>
-        <div class="star-wrapper {{stars}}">
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-            <div class="star"></div>
-        </div>
-    </div>
-    </script>
-
-
-    <!-- add dummy template -->
-    <script id="tile-template-add" type="text/x-handlebars-template">
-    <div class="col-sm-4">
-        <div class="tile" style="background-color: #f48f00;">
-            <div class="content-active">
-                <div class="input-wrapper is-empty">
-                    <input type="text" name="location" placeholder="Enter City" />
+        <div class="col-sm-4">
+            <div class="tile" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url({{imageUrl}})">
+                <div class="input-wrapper">
+                    <input type="text" name="location" placeholder="Location" value="{{locationName}}" />
                     <div class="icon-pencil glyphicon glyphicon-pencil"></div>
                 </div>
                 <div class="flex-row flex-between">
                     <button type="button" aria-label="Decrease" data-role="decrease">
-                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
                     </button>
                     <div class="flex-row">
                         <div class="night-wrapper">
-                            <input type="text" name="nights" placeholder="0" />
+                            <input type="text" name="nights" placeholder="0" value="{{nights}}" />
                         </div>
                         <h5>nights</h5>
                     </div>
                     <button class="" aria-label="Increase" data-role="increase">
-                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                     </button>
                 </div>
                 <div class="flex-row flex-between rating-row">
-                    <div class="rating"><div class="rating_na"></div></div>
-                    <h4>0 €</h4>
+                    <div class="rating"><div class="rating_{{rating}}"></div></div>
+                    <h4 class="text-center">{{priceFormatte}}</h4>
                 </div>
-            </div>
-            <div class="content-add">
-                <button aria-label="Increase" data-role="activate">
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                </button>
+                <div class="star-wrapper {{stars}}">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                </div>
+                <h6>{{hotelName}}</h6>
             </div>
         </div>
-    </div>
     </script>
 
 
 </head>
 <body>
 
-    <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <a href="/" title="tripvago"><img class="img-responsive" src="assets/logo_tripvago_header.jpg"
+                                                  width="110px"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <p class="navbar-text">My Holiday trip ;)</p>
+                <p class="navbar-text"><span class="glyphicon glyphicon-heart" style="color: #a5000b"></span></p>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Mein
+                            Konto <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-sm-4">
+                <div class="tile" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url(http://imgec.trivago.com/itemimages/52/96/52964_v7_isq.jpeg)">
+                    <div class="input-wrapper">
+                        <input type="text" name="location" placeholder="Location" value="Berlin" />
+                        <div class="icon-pencil glyphicon glyphicon-pencil"></div>
+                    </div>
+                    <div class="flex-row flex-between">
+                        <button type="button" aria-label="Decrease" data-role="decrease">
+                            <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        </button>
+                        <div class="flex-row">
+                            <div class="night-wrapper">
+                                <input type="text" name="nights" placeholder="0" value="4" />
+                            </div>
+                            <h5>nights</h5>
+                        </div>
+                        <button class="" aria-label="Increase" data-role="increase">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="flex-row flex-between rating-row">
+                        <div class="rating"><div class="rating_4"></div></div>
+                        <h4 class="text-center">72€</h4>
+                    </div>
+                    <div class="star-wrapper">
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="tile is-active" style="background-color: #f48f00;">
+                    <div class="content-active">
+                        <div class="input-wrapper is-empty">
+                            <input type="text" name="location" placeholder="Enter City" />
+                            <div class="icon-pencil glyphicon glyphicon-pencil"></div>
+                        </div>
+
+                        <div class="flex-row flex-between">
+                            <button type="button" aria-label="Decrease" data-role="decrease">
+                                <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                            </button>
+                            <div class="flex-row">
+                                <div class="night-wrapper">
+                                    <input type="text" name="nights" placeholder="0" value="2" />
+                                </div>
+                                <h5>nights</h5>
+                            </div>
+                            <button class="" aria-label="Increase" data-role="increase">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                            </button>
+                        </div>
+
+                        <div class="flex-row flex-between rating-row">
+                            <div class="rating"><div class="rating_na"></div></div>
+                            <h4>0 €</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="tile" style="background-color: #f48f00;">
+                    <div class="content-active">
+                        <div class="input-wrapper is-empty">
+                            <input class="typeahead" type="text" name="location" placeholder="Enter City" />
+                            <div class="icon-pencil glyphicon glyphicon-pencil"></div>
+                        </div>
+
+                        <div class="flex-row flex-between">
+                            <button type="button" aria-label="Decrease" data-role="decrease">
+                                <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                            </button>
+                            <div class="flex-row">
+                                <div class="night-wrapper">
+                                    <input type="text" name="nights" placeholder="0" />
+                                </div>
+                                <h5>nights</h5>
+                            </div>
+                            <button class="" aria-label="Increase" data-role="increase">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                            </button>
+                        </div>
+
+                        <div class="flex-row flex-between rating-row">
+                            <div class="rating"><div class="rating_na"></div></div>
+                            <h4>0 €</h4>
+                        </div>
+                    </div>
+                    <div class="content-add">
+                        <button aria-label="Increase" data-role="activate">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                        </button>
+                    </div>
+            </div>
+            </div>
+
         </div>
 
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <h1>Tripvago</h1>
-
-            <div class="row" id="mainColumns"></div>
 
             </div>
         </div>
@@ -117,15 +215,18 @@
         </div>
     </div>
 
+    <div class="container">
+        <div class="row" id="target">
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="build/jquery.plugins.min.js"></script>
     <script src="build/scripts.min.js"></script>
 
     <script type="text/javascript">
-
-
-    $('#startDate').datetimepicker({
+        $('#startDate').datetimepicker({
             locale: 'en',
             format: 'YYYY-MM-DD'
         });
