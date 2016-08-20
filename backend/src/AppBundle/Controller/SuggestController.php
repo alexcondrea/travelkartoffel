@@ -12,12 +12,6 @@ use Trivago\Tas\Tas;
 
 class SuggestController extends Controller
 {
-    const PARAMETERS = [
-        'path', 'item', 'start_date', 'end_date',
-        'room_type', 'currency', 'category', 'limit',
-        'offset', 'order', 'rating_class', 'hotel_name', 'max_price'
-    ];
-
     /**
      * @Route("/kartoffel/api/search/hotel-collection", name="trivago_kartoffel_search_hotel")
      */
