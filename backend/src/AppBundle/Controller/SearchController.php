@@ -31,16 +31,16 @@ class SearchController extends Controller
         $request = new HotelCollectionRequest($keys);
 
         try {
-            $locations = $this->get('trivago.tas.client')
+            $hotels = $this->get('trivago.api_workaround')
                 ->getHotelCollection($request);
         } catch (ProblemException $e) {
             return $this->createNotFoundException('API error: ' . $e->getMessage());
         }
 
         $locs = [];
-        foreach($locations as $location) {
+        foreach($hotels as $hotel) {
             // @TODO: decorate data
-            $locs[] = json_decode($this->get('serializer')->serialize($location, 'json'), true);
+            $locs[] = json_decode($this->get('serializer')->serialize($hotel, 'json'), true);
         }
 
         return $this->json(['items' => $locs]);
