@@ -20,20 +20,6 @@ var getRatingClass = function(value) {
 var tileSource = $("#tile-template").html();
 var tiletemplate = Handlebars.compile(tileSource);
 
-data.items.forEach(function(item) {
-    var info = {
-        hotelName: item.name,
-        locationName: item.city,
-        nights: 3,
-        rating: getRatingClass(item.ratingValue),
-        imageUrl: item.mainImage.extraLarge,
-        priceFormatte: item.deals[0].price.formatted,
-        stars: 'star_' + item.category
-    };
-    var $tile = tiletemplate(info);
-
-    $('#target').append($tile);
-});
 
 function getTrivagoColor() {
     var colors = [
@@ -53,6 +39,21 @@ function fillColumns() {
     var source = $("#tile-template").html();
     var template = Handlebars.compile(source);
     $.getJSON("http://tripvago.ga/kartoffel/api/search/hotel-collection?path=8514", function function_name(data) {
+
+        //         data.items.forEach(function(item) {
+        //     var info = {
+        //         hotelName: item.name,
+        //         locationName: item.city,
+        //         nights: 3,
+        //         rating: getRatingClass(item.ratingValue),
+        //         imageUrl: item.mainImage.extraLarge,
+        //         priceFormatte: item.deals[0].price.formatted,
+        //         stars: 'star_' + item.category
+        //     };
+        //     var $tile = tiletemplate(info);
+
+        //     $('#target').append($tile);
+        // });
         console.log(data);
         var context = {
             locationName: "Berlin",
