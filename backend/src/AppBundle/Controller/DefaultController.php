@@ -19,7 +19,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/build/{path}", name="trivago_kartoffel_homepage", requirements={"path"=".+"})
+     * @Route("/build/{path}", requirements={"path"=".+"})
      */
     public function pathAction($path)
     {
