@@ -25,14 +25,7 @@ $('.typeahead').typeahead({
 }, {
     display: 'location',
     templates: {
-        suggestion: Handlebars.compile('' +
-            '<div class="card">' +
-            '<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>' +
-            '<div class="description">' +
-            '<div class="location"><strong>{{location}}</strong></div>' +
-            '<div class="country">{{country}}</div>' +
-            '</div>' +
-            '</div>')
+        suggestion: Handlebars.compile('<span></span>')
     },
     source: placesToVisit
 });
