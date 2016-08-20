@@ -66,9 +66,11 @@ gulp.task('build-css', function () {
         .pipe(gulp.dest('build')).on('error', gutil.log);
 });
 
+gulp.task('build', ['build-css', 'squish-jquery', 'build-js']);
+
 // Default task
 gulp.task('watch', function () {
-    gulp.watch('./index.html', [])
+    gulp.watch('./index.html', []);
     gulp.watch('assets/js/libs/**/*.js', ['squish-jquery']);
     gulp.watch('assets/js/*.js', ['build-js']);
     gulp.watch('assets/less/**/*.less', ['build-css']);
