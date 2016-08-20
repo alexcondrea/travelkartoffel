@@ -92,4 +92,30 @@
       }
     }
   }
+
+  .content-active {
+    display: none;
+  }
+
+  .content-add {
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    height: 100%;
+
+    [data-role="activate"] {
+      font-size: 80px;
+    }
+  }
+
+  &.is-active {
+
+    .content-active {
+      display: block;
+    }
+
+    .content-add {
+      display: none;
+    }
+  }
 }

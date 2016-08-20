@@ -9,7 +9,7 @@ $('body').on('change', '.tile .input-wrapper input', function(event) {
   }
 });
 
-$('body').on('click', '.tile button', function(event) {
+$('body').on('click', '.tile button[data-role="decrease"], .tile button[data-role="increase"]', function(event) {
   var $el = $(this);
   var $wrapper = $el.closest('.flex-row');
   var $input = $wrapper.find('input[type="text"]');
@@ -30,4 +30,12 @@ $('body').on('click', '.tile button', function(event) {
   }
 
   $input.val(nights);
+});
+
+$('body').on('click', '.tile button[data-role="activate"]', function(event) {
+  var $el = $(this);
+  var $tile = $el.closest('.tile');
+
+  $tile.addClass('is-active');
+  $tile.find('input').eq(0).focus();
 });
