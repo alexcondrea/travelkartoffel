@@ -2,12 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Utils\ParameterUtils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Trivago\Tas\Config;
 use Trivago\Tas\Request\HotelCollectionRequest;
-use Trivago\Tas\Request\LocationsRequest;
 use Trivago\Tas\Response\ProblemException;
 use Trivago\Tas\Tas;
 
@@ -24,9 +23,7 @@ class SearchController extends Controller
      */
     public function hotelProxyAction(Request $request)
     {
-        $keys = array_merge(['currency' => 'EUR'],
-            array_intersect_key($request->query->all(), array_fill_keys(static::PARAMETERS, 1))
-        );
+        $keys = ParameterUtils::normalizer($request->query->all());
 
         // resolve path name to id
         if(isset($keys['path']) && !is_numeric($keys['path'])) {

@@ -27,11 +27,11 @@ class ConfigFactory
             Config::SECRET_KEY => $secret,
             Config::HTTP_HANDLER => new Curl(),
             Config::GET_TRACKING_ID_CALLBACK => function () {
-                // ??
-                return null;
+                return isset($_COOKIE['trv_tid']) ? $_COOKIE['trv_tid'] : null;
             },
             Config::STORE_TRACKING_ID_CALLBACK => function ($trackingId) {
-                // ??
+                // keep the Tracking-Id as long as possible
+                setcookie('trv_tid', $trackingId, 2147483647, '/', null, null, true);
             }
         ]);
 
