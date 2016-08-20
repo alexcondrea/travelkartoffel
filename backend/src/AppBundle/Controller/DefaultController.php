@@ -25,7 +25,7 @@ class DefaultController extends Controller
     {
         $file = $this->container->getParameter('kernel.root_dir') . '/../../frontend/build/' . $path;
         if(!is_file($file)) {
-            $this->createNotFoundException('file not found ' . $file);
+            throw $this->createNotFoundException('file not found ' . $file);
         }
 
         $content = file_get_contents($file);
