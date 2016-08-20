@@ -8,3 +8,4 @@ http://company.trivago.com/hackathon-2016/
 
  * https://api.trivago.com/webservice/tas/secure/docs/index.html
  * https://github.com/trivago/tas-sdk-php
+ * https://api.trivago.com/webservice/tas/secure/docs/index.html#header-php-example
