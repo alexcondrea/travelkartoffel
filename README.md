@@ -9,6 +9,13 @@
 
 ## Frontend
 
-## Doku
+## Präsentation
 
- - [Baked Potato Laser Cat](https://drawception.com/game/XOnQED86w1/potato-cat-deathray-with-cheese/)
+ - Erstellung mit [reveal.js](http://lab.hakim.se/reveal-js/)
+ - Inhalt
+  - Die Idee/Das Problem/Warum?
+  - Funktionen/Demo/Technische Details
+  - Ausblick/Erweiterungen
+  - Danke/Teambild
+  - [Baked Potato Laser Cat](https://drawception.com/game/XOnQED86w1/potato-cat-deathray-with-cheese/)
+ 
