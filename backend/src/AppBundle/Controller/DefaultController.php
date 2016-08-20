@@ -14,6 +14,36 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $path = dirname(dirname($this->container->getParameter('kernel.root_dir'))) . '/frontend/index.html';
+        if (!is_file($path)) {
+            throw $this->createNotFoundException('file not found ' . $path);
+        }
+
+        $content = file_get_contents($path);
+        return new Response($content);
+    }
+
+    /**
+     * @Route("/build/{path}", requirements={"path"=".+"})
+     */
+    public function pathAction($path)
+    {
+        $file = $this->container->getParameter('kernel.root_dir') . '/../../frontend/build/' . $path;
+        if(!is_file($file)) {
+            throw $this->createNotFoundException('file not found ' . $file);
+        }
+
+        $content = file_get_contents($file);
+
+        return new Response($content);
+
+    }
+
+        /**
+     * @Route("/routes", name="trivago_kartoffel_routes")
+     */
+    public function routesAction(Request $request)
+    {
         $routes = [];
         foreach($this->get('router')->getRouteCollection() as $name => $route) {
             /** @var $route \Symfony\Component\Routing\Route */
