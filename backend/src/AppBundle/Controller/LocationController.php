@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Trivago\Tas\Request\LocationsRequest;
 use Trivago\Tas\Response\Locations\Location;
-use Trivago\Tas\Tas;
 
 class LocationController extends Controller
 {
@@ -35,7 +34,13 @@ class LocationController extends Controller
         $locs = [];
         foreach($locations as $location) {
             // @TODO: decorate data
-            $locs[] = json_decode($this->get('serializer')->serialize($location, 'json'), true);
+            $loc = json_decode($this->get('serializer')->serialize($location, 'json'), true);
+
+            // trivago highlight suggest search "{Dort}mund"
+            $loc['nameFormatted'] = str_replace('{', '', $location->getName());
+            $loc['nameFormatted'] = str_replace('}', '', $loc['nameFormatted']);
+
+            $locs[] = $loc;
         }
 
         return $this->json(['items' => $locs]);
