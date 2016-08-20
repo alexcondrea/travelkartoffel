@@ -3,37 +3,23 @@
 @link-color: #f6a03a;
 @link-color-hover: lighten(@link-color, 50%);
 
-body {
-    -webkit-font-smoothing: antialiased;
-    line-height: 32px;
-    font-size: 20px;
-    color: #454054;
-    font-weight: 300;
-}
-section, header, footer, main, article, nav, aside { position: relative; }
-a {
-    outline: none !important;
-    text-decoration: none !important;
-    color: @link-color;
-    transition: all 225ms ease;
+.navbar-default {
+  border: none;
+  margin-bottom: 0;
 
-    &a:hover,
-    &a:focus {
-        color: @link-color-hover;
-    }
+  .container-fluid {
+    background-color: white;
+  }
 }
-p { margin-bottom: 18px; }
-h1, .h1 {
-    font-size: 50px;
-    text-align: center;
-    font-weight: 300;
-}
-h2, .h2 {
 
+.travel-log {
+  font-size: 11px;
 }
-h3, .h3 {
 
-}
-h4, .h4 {
+.recommend-trips {
+  font-size: 11px;
 
+  .glyphicon-heart .likes {
+    color: #F47A6B;
+  }
 }
