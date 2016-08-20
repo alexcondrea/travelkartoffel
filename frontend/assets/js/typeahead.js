@@ -9,10 +9,8 @@ var placesToVisit = new Bloodhound({
         transform: function (locations) {
             // Map the remote source JSON array to a JavaScript object array
             return $.map(locations.items, function (location) {
-                location.name = location.name.replace('{','');
-                location.name = location.name.replace('}','');
                 return {
-                    value: location.name
+                    value: location['nameFormatted']
                 };
             });
         }
