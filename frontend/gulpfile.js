@@ -28,13 +28,13 @@ gulp.task('squish-jquery', function () {
 // Minify Custom JS: Run manually with: "gulp build-js"
 gulp.task('build-js', function () {
     return gulp.src('assets/js/*.js')
-        .pipe(plugins.jshint())
-        .pipe(plugins.jshint.reporter('jshint-stylish'))
-        .pipe(plugins.uglify({
-            output: {
-                'ascii_only': true
-            }
-        }))
+        // .pipe(plugins.jshint())
+        // .pipe(plugins.jshint.reporter('jshint-stylish'))
+        // .pipe(plugins.uglify({
+        //     output: {
+        //         'ascii_only': true
+        //     }
+        // }))
         .pipe(plugins.concat('scripts.min.js'))
         .pipe(gulp.dest('build'));
 });
