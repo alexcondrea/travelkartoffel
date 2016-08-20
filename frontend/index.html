@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="build/style.css">
 
     <script id="tile-template" type="text/x-handlebars-template">
-        <div class="col-sm-4">
             <div class="tile" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url({{imageUrl}})">
                 <div class="input-wrapper">
                     <input type="text" name="location" placeholder="Location" value="{{locationName}}" />
@@ -50,11 +49,11 @@
                 </div>
                 <h6>{{hotelName}}</h6>
             </div>
-        </div>
     </script>
 
     <script id="tile-template-empty" type="text/x-handlebars-template">
-        <div class="slick center" style="width: 200px;">
+
+        <div class="slick center col-md-12" style="width: 200px;">
             <div class="tile is-active" style="background-color: #f48f00;">
                 <div class="content-active">
                     <div class="input-wrapper is-empty">
@@ -136,9 +135,6 @@
     <div class="hotel-slot">
         <div class="container">
             <div class="row">
-
-
-            <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <h1>Tripvago</h1>
                 </div>
@@ -161,7 +157,9 @@
     </div>
 
     <div class="container-fluid">
+    <div class="row">
         <div class="hotel-collection-result"></div>
+</div>
     </div>
 
 
