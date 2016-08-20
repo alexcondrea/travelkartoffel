@@ -13,80 +13,42 @@
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- ICONS - THANKS A LOT APPLE... -->
-    <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="https://scotch.io/favicon.ico">
-    <link rel="apple-touch-icon" sizes="57x57" href="https://scotch.io/wp-content/themes/thirty/img/icons/favicon-57.png">
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://scotch.io/wp-content/themes/thirty/img/icons/favicon-57.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="https://scotch.io/wp-content/themes/thirty/img/icons/favicon-72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="https://scotch.io/wp-content/themes/thirty/img/icons/favicon-114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="https://scotch.io/wp-content/themes/thirty/img/icons/favicon-120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="https://scotch.io/wp-content/themes/thirty/img/icons/favicon-144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://scotch.io/wp-content/themes/thirty/img/icons/favicon-152.png">
-    <meta name="application-name" content="Scotch Scotch scotch">
-    <meta name="msapplication-TileImage" content="https://scotch.io/wp-content/themes/thirty/img/icons/favicon-144.png">
-    <meta name="msapplication-TileColor" content="#2A2A2A">
-
-    <!-- SEARCH -->
-    <meta name="author" content="">
-    <meta name="description" content="">
-    <link rel="canonical" href="">
-
-    <!-- TWITTER -->
-    <meta name="twitter:card" content="">
-    <meta name="twitter:site" content="">
-    <meta name="twitter:creator" content="">
-    <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="">
-    <meta name="twitter:image:src" content="">
-
-    <!-- FACEBOOK -->
-    <meta property="og:site_name" content="">
-    <meta property="og:url" content="">
-    <meta property="og:type" content="">
-    <meta property="og:title" content="">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="">
-    <meta property="fb:app_id" content="">
-    <meta property="fb:admins" content="">
-
-    <!-- G+ -->
-    <meta itemprop="name" content="">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="">
-
     <!-- CSS -->
     <link rel="stylesheet" href="build/style.css">
 
     <script id="tile-template" type="text/x-handlebars-template">
-        <div class="tile" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url({{imageUrl}})">
-            <div class="input-wrapper">
-                <input type="text" name="location" placeholder="Location" value="{{locationName}}" />
-                <div class="icon-pencil glyphicon glyphicon-pencil"></div>
-            </div>
-            <div class="flex-row flex-between">
-                <button type="button" aria-label="Decrease" data-role="decrease">
-                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                </button>
-                <div class="flex-row">
-                    <div class="night-wrapper">
-                        <input type="text" name="nights" placeholder="0" value="{{nights}}" />
-                    </div>
-                    <h5>nights</h5>
+        <div class="col-sm-4">
+            <div class="tile" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url({{imageUrl}})">
+                <div class="input-wrapper">
+                    <input type="text" name="location" placeholder="Location" value="{{locationName}}" />
+                    <div class="icon-pencil glyphicon glyphicon-pencil"></div>
                 </div>
-                <button class="" aria-label="Increase" data-role="increase">
-                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="flex-row flex-between rating-row">
-                <div class="rating"><div class="rating_{{rating}}"></div></div>
-                <h4 class="text-center">{{priceFormatte}}</h4>
-            </div>
-            <div class="star-wrapper {{stars}}">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
+                <div class="flex-row flex-between">
+                    <button type="button" aria-label="Decrease" data-role="decrease">
+                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                    </button>
+                    <div class="flex-row">
+                        <div class="night-wrapper">
+                            <input type="text" name="nights" placeholder="0" value="{{nights}}" />
+                        </div>
+                        <h5>nights</h5>
+                    </div>
+                    <button class="" aria-label="Increase" data-role="increase">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="flex-row flex-between rating-row">
+                    <div class="rating"><div class="rating_{{rating}}"></div></div>
+                    <h4 class="text-center">{{priceFormatte}}</h4>
+                </div>
+                <div class="star-wrapper {{stars}}">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                </div>
+                <h6>{{hotelName}}</h6>
             </div>
         </div>
     </script>
@@ -224,6 +186,11 @@
         </div>
     </div>
 
+    <div class="container">
+        <div class="row" id="target">
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="build/jquery.plugins.min.js"></script>
@@ -234,7 +201,26 @@
             locale: 'en',
             format: 'YYYY-MM-DD'
         });
-        console.log(data)
+
+        var tileSource = $("#tile-template").html();
+        var tiletemplate = Handlebars.compile(tileSource);
+
+        data.items.forEach(function(item) {
+
+            var info = {
+                hotelName: item.name,
+                locationName: item.city,
+                nights: 3,
+                imageUrl: item.mainImage.extraLarge,
+                priceFormatte: item.deals[0].price.formatted,
+                stars: 'star_' + item.category
+            };
+
+            var $tile = tiletemplate(info);
+
+            $('#target').append($tile);
+        });
+
     </script>
 
 </body>
