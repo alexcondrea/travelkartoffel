@@ -1,4 +1,12 @@
+function getTotalPrice() {
+    return window.tripData.reduce(function (prev, curr) {
+        return prev + curr.price;
+    }, 0);
+}
+
 function postAjaxForPriceSave() {
+    var price = getTotalPrice;
+
     $.ajax({
         type: "POST",
         url: 'http://tripvago.ga/kartoffel/api/price?start_date=2016-08-30&current_price=10000',
@@ -12,6 +20,6 @@ function successPriceSave(retText) {
     $('#savePriceText').html(retText);
 }
 
-$('body').on('kartoffel:data:loaded', function (event) {
+$('body').on('kartoffel:data:loaded', function () {
     postAjaxForPriceSave();
 });
