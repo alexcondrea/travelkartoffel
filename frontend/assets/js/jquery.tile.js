@@ -1,5 +1,17 @@
 var updateStatus = function(rowIndex, data) {
   window.tripStatus[rowIndex] = data;
+
+  var totalNights = 0;
+  var totalPrice = 0;
+
+  tripStatus.forEach(function(trip) {
+    totalNights += trip.nights;
+    totalPrice += (trip.nights * trip.price);
+  });
+
+  $('#totalNights').html(totalNights);
+  $('#totalPrice').html(totalPrice);
+
   console.log(window.tripStatus);
 }
 
