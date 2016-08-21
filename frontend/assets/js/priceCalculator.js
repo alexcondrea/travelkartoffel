@@ -7,6 +7,11 @@ function getTotalPrice() {
 }
 
 function postAjaxForPriceSave() {
+    if(!window.tripStatus || window.tripStatus.length <= 1 ) {
+        console.log('exit because only one item');
+        return;
+    }
+
     var price = getTotalPrice();
     var date = $('#startDate input').val();
 
