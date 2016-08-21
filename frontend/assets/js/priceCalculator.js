@@ -1,3 +1,5 @@
+var lastPriceXhr = null
+
 function getTotalPrice() {
     var price = window.tripStatus.reduce(function (prev, curr) {
         return prev + curr.price * curr.nights;
@@ -7,6 +9,11 @@ function getTotalPrice() {
 }
 
 function postAjaxForPriceSave() {
+    if(lastPriceXhr) {
+        console.log('last ajax request aborted');
+        lastPriceXhr.abort();
+
+    }
     if(!window.tripStatus || window.tripStatus.length <= 1 ) {
         console.log('exit because only one item');
         return;
@@ -15,7 +22,7 @@ function postAjaxForPriceSave() {
     var price = getTotalPrice();
     var date = $('#startDate input').val();
 
-    $.ajax({
+    lastPriceXhr = $.ajax({
         type: "POST",
         url: 'http://tripvago.ga/kartoffel/api/price?start_date=' + date + '&current_price=' + price,
         data: JSON.stringify(window.tripStatus),
@@ -28,6 +35,7 @@ function successPriceSave(retText) {
     element.html(retText);
 
     element.closest(".price-suggest").addClass("active");
+    lastPriceXhr = null
 }
 
 $('body').on('kartoffel:data:loaded', function () {
