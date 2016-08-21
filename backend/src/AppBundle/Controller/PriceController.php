@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Model\HotelsSteps;
-use AppBundle\Utils\ArrayUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 class PriceController extends Controller
 {
     /**
-     * @Route("/kartoffel/api/price")
+     * @Route("/kartoffel/api/price", methods={"GET"})
      */
     public function indexAction(Request $request)
     {
@@ -26,17 +25,30 @@ class PriceController extends Controller
     }
 
     /**
-     * @Route("/kartoffel/api/storage/{id}")
+     * @Route("/kartoffel/api/price", methods={"POST"})
      */
-    public function detailsAction($id)
+    public function ajaxAction(Request $request)
     {
-        foreach($this->getStorage() as $storage) {
-            if($storage['id'] == $id) {
-                return $this->json($storage);
-            }
+        $date = $request->query->get('start_date', (new \DateTime())->format('Y-m-d'));
+        $price = $request->query->get('current_price', 1000);
+
+        $startDate = date_create_from_format('Y-m-d', $date);
+
+        $content = json_decode($request->getContent(), true);
+
+        $prices = $this->get('trivago.step_calculator')->getPriceCalculation($startDate, HotelsSteps::fromArray($content));
+
+        $bestStep = $prices->getBestStep();
+
+        if($bestStep['price'] >= $price) {
+            throw $this->createNotFoundException('No price improvements found');
         }
 
-        throw $this->createNotFoundException('Element not found');
+        return $this->render('price/ajax.html.twig', [
+            'result' => $bestStep,
+            'steps' => array_column($bestStep['steps'], 'location'),
+            'price_save_up' => $price - $bestStep['price'],
+        ]);
     }
 
     /**
