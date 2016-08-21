@@ -5,6 +5,7 @@ namespace AppBundle\Calculator;
 use AppBundle\Trivago\ApiWorkaround;
 use Trivago\Tas\Request\HotelCollectionRequest;
 use Trivago\Tas\Request\LocationsRequest;
+use Trivago\Tas\Response\HotelCollection\Hotel;
 use Trivago\Tas\Response\ProblemException;
 
 class PriceCalculator
@@ -46,9 +47,24 @@ class PriceCalculator
 
         try {
             $hotels = $this->apiWorkaround->getHotelCollection($request);
-            return trim($hotels->current()->getBestDeal()->getPrice(), '€') * $nights;
+            $hotels = $hotels->toArray();
+
+            uasort($hotels, function (Hotel $a, Hotel $b) {
+                if ($this->formatPrice($a->getBestDeal()->getPrice()) == $this->formatPrice($b->getBestDeal()->getPrice())) {
+                    return 0;
+                }
+
+                return ($this->formatPrice($a->getBestDeal()->getPrice()) < $this->formatPrice($b->getBestDeal()->getPrice())) ? -1 : 1;
+            });
+
+            return trim($hotels[0]->getBestDeal()->getPrice(), '€') * $nights;
         } catch (ProblemException $e) {
             return null;
         }
+    }
+
+    private function formatPrice($price)
+    {
+        return intval(trim($price, '€'));
     }
 }
