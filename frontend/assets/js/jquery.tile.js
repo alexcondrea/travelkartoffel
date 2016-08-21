@@ -45,13 +45,18 @@ $('body').on('typeahead:autocomplete, typeahead:change', '.typeahead', function(
   var $tile = $(event.target).closest('.tile');
   var nights = parseInt($tile.find('[name="nights"]').val(), 10);
 
+  var index = $tile.closest('.slick').index();
+
   var startDate = $('#startDate .form-control').val();
   var tmp = startDate.split('-');
 
   // fuck, only for demo. lolz
-  var endDate = [tmp[0], parseInt(tmp[1], 10) - 1, parseInt(tmp[tmp.length - 1], 10) + nights].join('-');
+  var endDate = [tmp[0], parseInt(tmp[1], 10), parseInt(tmp[tmp.length - 1], 10) + nights].join('-');
 
   if (window.typeaheadResult && window.typeaheadResult.pathId) {
-    console.log(window.typeaheadResult.pathId, startDate, endDate);
+    $('.slick-' + index  ).slick('unslick');
+    fillColumn(window.typeaheadResult.pathId, startDate, endDate, index, function() {
+      initSlick('.slick-' + index  );
+    });
   }
 });
