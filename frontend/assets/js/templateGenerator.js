@@ -35,39 +35,41 @@ function getTrivagoColor() {
     return colors[colIndex];
 }
 
-function fillColumns() {
+function fillColumn(locationId, startDate, endDate) {
+    var url = "http://tripvago.ga/kartoffel/api/search/hotel-collection?path=" + locationId + "&start_date=" + startDate + "&end_date=" + endDate
+
     var source = $("#tile-template").html();
     var template = Handlebars.compile(source);
-    $.getJSON("http://tripvago.ga/kartoffel/api/search/hotel-collection?path=8514", function function_name(data) {
 
-        //         data.items.forEach(function(item) {
-        //     var info = {
-        //         hotelName: item.name,
-        //         locationName: item.city,
-        //         nights: 3,
-        //         rating: getRatingClass(item.ratingValue),
-        //         imageUrl: item.mainImage.extraLarge,
-        //         priceFormatte: item.deals[0].price.formatted,
-        //         stars: 'star_' + item.category
-        //     };
-        //     var $tile = tiletemplate(info);
+    var $tmp = $('<div class="slick center col-md-2 col-md-offset-0"></div>');
+    $.getJSON(url, function function_name(data) {
 
-        //     $('#target').append($tile);
-        // });
-        console.log(data);
-        var context = {
-            locationName: "Berlin",
-            nights: "2",
-            stars: "4",
-            rating: "10",
-            priceFormat: "100€"
-        };
-        var html = template(context);
+        data.items.forEach(function(item) {
+            var info = {
+                hotelName: item.name,
+                locationName: item.city,
+                nights: 3,
+                rating: getRatingClass(item.ratingValue),
+                imageUrl: item.mainImage.extraLarge,
+                priceFormatte: item.deals[0].price.formatted,
+                stars: 'star_' + item.category
+            };
 
-        $("#mainColumns").append(html);
-    })
+            var context = {
+                locationName: "Berlin",
+                nights: "2",
+                stars: "4",
+                rating: "10",
+                priceFormat: "100€"
+            };
+            var html = template(info);
 
+            $tmp.append(html);
+        });
+        $('.hotel-collection-result').append($tmp);
+    });
 }
+
 
 $('#startDate').datetimepicker({
     locale: 'en',
@@ -83,26 +85,26 @@ window.addEventListener("keydown", function(e) {
 
 var fillInital = function() {
     var AMOUNT = 11;
-    var ROWS = 3;
+    var ROWS = 2;
     var i = 0;
     var k = 0;
-    var source = $('#tile-template').html();
+
+    var source = $('#tile-template-empty').html();
     var emptyTile = Handlebars.compile(source);
     var $item = emptyTile();
     var $tmp = '';
 
-    for(i = 0; i < ROWS; i++) {
+    for (i = 0; i < ROWS; i++) {
         $tmp = $('<div class="slick center col-md-12" style="width: 230px; height: 230px;"></div>');
-        for(k = 0; k < AMOUNT; k++) {
+        for (k = 0; k < AMOUNT; k++) {
             $tmp.append($item);
         }
         $('.hotel-collection-result .slick-wrapper').append($tmp);
     }
     $('.hotel-collection-result .tile:last').removeClass('is-active');
-}
+};
+fillColumn("8514", "2016-08-20", "2016-08-25");
 fillInital();
-
-//fillColumns();
 
 $('.center').slick({
     centerMode: true,
