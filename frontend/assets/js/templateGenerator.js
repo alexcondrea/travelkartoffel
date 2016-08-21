@@ -2,8 +2,6 @@ window.locationData = [];
 window.tripData = [];
 window.tripStatus = [];
 
-var colIndex = 0;
-
 var initSlick = function(selector) {
     $(selector).slick({
         centerMode: true,
@@ -39,18 +37,14 @@ var tileSource = $("#tile-template").html();
 var tiletemplate = Handlebars.compile(tileSource);
 
 
-function getTrivagoColor() {
+function getTrivagoColor(index) {
     var colors = [
         "rgb(244, 143, 0)",
         "rgb(0, 127, 175)",
         "rgb(201, 74, 56)"
     ]
-    if (colIndex < 2) {
-        colIndex++;
-    } else {
-        colIndex = 0;
-    }
-    return colors[colIndex];
+
+    return colors[index];
 }
 
 function fillColumn(locationId, startDate, endDate, index, done) {
@@ -134,8 +128,13 @@ var fillInital = function() {
     var source = $('#tile-template-empty').html();
     var emptyTile = Handlebars.compile(source);
     var $item = emptyTile();
+    var $tmp = '';
 
     for(i = 0; i < ROWS; i++) {
+        $tmp = $('<div />').html($item);
+        $tmp.find('.tile').attr('style', 'background-color: ' + getTrivagoColor(i) + ';');
+        $item =  $tmp.html();
+
         $('.hotel-collection-result .slick-wrapper')
             .append('<div class="slick center col-md-12 slick-'+i+'" style="width: 230px; height: 230px;">' + $item + '</div>');
     }
