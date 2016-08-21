@@ -1,3 +1,7 @@
+window.locationData = [];
+window.tripData = [];
+window.tripStatus = [];
+
 var colIndex = 0;
 
 var initSlick = function(selector) {
@@ -58,11 +62,20 @@ function fillColumn(locationId, startDate, endDate, index, done) {
     var $tmp = $('<div style="width: 230px; height: 230px;"></div>');
     $.getJSON(url, function function_name(data) {
 
+        var $container = $('.hotel-collection-result .slick-wrapper .slick').eq(index);
+        var nights = parseInt($container.find('[name="nights"]').val(), 10);
+        var hotelData = {};
+
+        tripData[index] = {
+            hotelId: null,
+            data: data
+        };
+
         data.items.forEach(function(item) {
             var info = {
                 hotelName: item.name,
                 locationName: item.city,
-                nights: 3,
+                nights: nights,
                 rating: getRatingClass(item.ratingValue),
                 imageUrl: item.mainImage.extraLarge,
                 priceFormatte: item.deals[0].price.formatted,
@@ -73,12 +86,31 @@ function fillColumn(locationId, startDate, endDate, index, done) {
 
             $tmp.append(html);
         });
-        $('.hotel-collection-result .slick-wrapper .slick').eq(index)
+
+        $container
             .removeAttr('class')
             .addClass('center slick col-md-12 slick-' + index)
             .html($tmp.html());
 
-        console.log($('.hotel-collection-result .slick-wrapper .slick').eq(index).html());
+        var price = 0;
+
+        try {
+            price = data.items[0].deals[0].price.formatted.replace('€', '');
+            price = parseInt(price, 10);
+        } catch (ex) {
+            price = 99;
+        }
+
+        hotelData = {
+            price: price,
+            hotelIndex: 0,
+            nights: nights,
+            location: window.locationData[index].nameFormatted,
+            pathId: window.locationData[index].pathId
+        };
+
+        updateStatus(index, hotelData);
+
         done();
     });
 }
