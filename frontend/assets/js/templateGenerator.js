@@ -107,7 +107,7 @@ var fillInital = function() {
         $('.hotel-collection-result .slick-wrapper')
             .append('<div class="slick center col-md-12 slick-'+i+'" style="width: 230px; height: 230px;">' + $item + '</div>');
     }
-    $('.hotel-collection-result .tile:last').removeClass('is-active');
+    $('.hotel-collection-result .tile:first').addClass('is-active');
 };
 
 fillInital();
