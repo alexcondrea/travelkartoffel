@@ -1,3 +1,6 @@
+window.lastRowIndex = -1;
+window.lastHotelIndex = -1;
+
 var updateStatus = function(rowIndex, data) {
   window.tripStatus[rowIndex] = data;
 
@@ -47,7 +50,9 @@ $('body').on('click', '.tile button[data-role="decrease"], .tile button[data-rol
     }
   }
 
-  $input.val(nights);
+  $input
+    .val(nights)
+    .trigger('change');
 });
 
 $('body').on('click', '.tile button[data-role="activate"]', function(event) {
@@ -84,10 +89,16 @@ $('body').on('typeahead:autocomplete, typeahead:change', '.typeahead', function(
 $('body').on('afterChange', '.slick', function(event, e, hotelIndex) {
   var $slickElement = $(event.target);
   var rowIndex = $slickElement.index();
+
+  // Slick fires this even on every mousedown :-(
+  if (window.lastRowIndex === rowIndex && window.lastHotelIndex === hotelIndex) {
+    return;
+  }
+
   var nights = parseInt($slickElement.find('[name="nights"]').val(), 10);
   var hotelData = tripData[rowIndex].data.items[hotelIndex];
-
   var price = hotelData.deals[0].price.formatted;
+
   price = price.replace('€', '');
   price = parseInt(price, 10);
 
@@ -100,4 +111,38 @@ $('body').on('afterChange', '.slick', function(event, e, hotelIndex) {
   };
 
   updateStatus(rowIndex, data);
+
+  window.lastRowIndex = rowIndex;
+  window.lastHotelIndex = hotelIndex;
+});
+
+
+$('body').on('change', '[name="nights"]', function(event, e) {
+  var $slickElement = $(event.target).closest('.slick');
+  var rowIndex = $slickElement.index();
+
+  var hotelIndex = null;
+  var nights = null;
+  var hotelData = null;
+  var price = null;
+
+  if (tripData[rowIndex] && tripData[rowIndex].data) {
+    hotelIndex = $slickElement.find('[name="nights"]').val() || 0;
+    nights = parseInt($slickElement.find('[name="nights"]').val(), 10);
+    hotelData = tripData[rowIndex].data.items[hotelIndex];
+
+    price = hotelData.deals[0].price.formatted;
+    price = price.replace('€', '');
+    price = parseInt(price, 10);
+
+    var data = {
+      hotelIndex: hotelIndex,
+      nights: nights,
+      price: price,
+      location: window.locationData[rowIndex].nameFormatted,
+      pathId: window.locationData[rowIndex].pathId
+    };
+
+    updateStatus(rowIndex, data);
+  }
 });

@@ -65,8 +65,9 @@ function fillColumn(locationId, startDate, endDate, index, done) {
             data: data
         };
 
-        data.items.forEach(function(item) {
+        data.items.forEach(function(item, index) {
             var info = {
+                hotelIndex: index,
                 hotelName: item.name,
                 locationName: item.city,
                 nights: nights,
