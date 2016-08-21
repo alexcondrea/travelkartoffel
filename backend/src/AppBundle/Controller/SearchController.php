@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Trivago\Tas\Request\HotelCollectionRequest;
+use Trivago\Tas\Response\HotelCollection\Hotel;
 use Trivago\Tas\Response\ProblemException;
 use Trivago\Tas\Tas;
 
@@ -30,12 +31,23 @@ class SearchController extends Controller
 
         $request = new HotelCollectionRequest($keys);
 
+
         try {
             $hotels = $this->get('trivago.api_workaround')
                 ->getHotelCollection($request);
         } catch (ProblemException $e) {
             return $this->createNotFoundException('API error: ' . $e->getMessage());
         }
+
+        $hotels = $hotels->toArray();
+
+        uasort($hotels, function (Hotel $a, Hotel $b) {
+            if ($this->formatPrice($a->getBestDeal()->getPrice()) == $this->formatPrice($b->getBestDeal()->getPrice())) {
+                return 0;
+            }
+
+            return ($this->formatPrice($a->getBestDeal()->getPrice()) < $this->formatPrice($b->getBestDeal()->getPrice())) ? -1 : 1;
+        });
 
         $locs = [];
         foreach($hotels as $hotel) {
@@ -44,5 +56,10 @@ class SearchController extends Controller
         }
 
         return $this->json(['items' => $locs]);
+    }
+
+    private function formatPrice($price)
+    {
+        return intval(trim($price, '€'));
     }
 }
