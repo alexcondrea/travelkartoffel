@@ -5,22 +5,30 @@ namespace AppBundle\Calculator;
 use AppBundle\Model\HotelsSteps;
 use AppBundle\Model\StepCalculation;
 use AppBundle\Utils\ArrayUtil;
+use Psr\Cache\CacheItemPoolInterface;
 
 class StepCalculator
 {
+    const CACHE_LIFETIME = 3600;
     /**
      * @var PriceCalculator
      */
     private $priceCalculator;
 
     /**
+     * @var CacheItemPoolInterface
+     */
+    private $cacheItemPool;
+
+    /**
      * StepCalculaor constructor.
      *
      * @param PriceCalculator $priceCalculator
      */
-    public function __construct(\AppBundle\Calculator\PriceCalculator $priceCalculator)
+    public function __construct(PriceCalculator $priceCalculator, CacheItemPoolInterface $cacheItemPool)
     {
         $this->priceCalculator = $priceCalculator;
+        $this->cacheItemPool = $cacheItemPool;
     }
 
     /**
@@ -31,6 +39,13 @@ class StepCalculator
     public function getPriceCalculation(\DateTime $startDate, HotelsSteps $hotelsSteps)
     {
         $r = [];
+
+        $key = md5($hotelsSteps->getHash() . $startDate->format('Y-m-d'));
+        $cache = $this->cacheItemPool->getItem($key);
+
+        if($cache->isHit()) {
+            return new StepCalculation($cache->get());
+        }
 
         foreach (ArrayUtil::getArrayPermutations($hotelsSteps->getLocations()) as $steps) {
             $stepStart = clone $startDate;
@@ -58,6 +73,9 @@ class StepCalculator
 
             $r[] = $result;
         };
+
+        $cache->set($r)->expiresAfter(self::CACHE_LIFETIME);
+        $this->cacheItemPool->save($cache);
 
         return new StepCalculation($r);
     }
