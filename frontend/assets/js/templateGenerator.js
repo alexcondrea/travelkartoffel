@@ -92,11 +92,11 @@ var fillInital = function() {
     var $tmp = '';
 
     for(i = 0; i < ROWS; i++) {
-        $tmp = $('<div class="slick center col-md-12" style="width: 200px;"></div>');
+        $tmp = $('<div class="slick center col-md-12" style="width: 230px; height: 230px;"></div>');
         for(k = 0; k < AMOUNT; k++) {
             $tmp.append($item);
         }
-        $('.hotel-collection-result').append($tmp);
+        $('.hotel-collection-result .slick-wrapper').append($tmp);
     }
     $('.hotel-collection-result .tile:last').removeClass('is-active');
 }
