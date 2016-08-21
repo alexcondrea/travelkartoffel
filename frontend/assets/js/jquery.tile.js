@@ -15,7 +15,6 @@ var updateStatus = function(rowIndex, data) {
   $('#totalNights').html(totalNights);
   $('#totalPrice').html(totalPrice);
 
-  console.log(window.tripStatus);
   $('body').trigger('kartoffel:data:loaded');
 };
 

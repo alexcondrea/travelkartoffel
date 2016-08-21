@@ -1,3 +1,17 @@
+var initTypeahead = function(selector) {
+    $(selector).typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+    }, {
+        display: 'location',
+        templates: {
+            suggestion: Handlebars.compile('<span></span>')
+        },
+        source: placesToVisit
+    });
+}
+
 var placesToVisit = new Bloodhound({
     datumTokenizer: function(datum) {
         return Bloodhound.tokenizers.whitespace(datum.value);
@@ -20,14 +34,4 @@ var placesToVisit = new Bloodhound({
     }
 });
 
-$('.typeahead').typeahead({
-    hint: true,
-    highlight: true,
-    minLength: 1
-}, {
-    display: 'location',
-    templates: {
-        suggestion: Handlebars.compile('<span></span>')
-    },
-    source: placesToVisit
-});
+initTypeahead('.typeahead');
