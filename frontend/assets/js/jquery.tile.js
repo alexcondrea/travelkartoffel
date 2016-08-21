@@ -119,6 +119,7 @@ $('body').on('afterChange', '.slick', function(event, e, hotelIndex) {
 
 $('body').on('change', '[name="nights"]', function(event, e) {
   var $slickElement = $(event.target).closest('.slick');
+  var $tileElement = $(event.target).closest('.tile');
   var rowIndex = $slickElement.index();
 
   var hotelIndex = null;
@@ -127,8 +128,8 @@ $('body').on('change', '[name="nights"]', function(event, e) {
   var price = null;
 
   if (tripData[rowIndex] && tripData[rowIndex].data) {
-    hotelIndex = $slickElement.find('[name="nights"]').val() || 0;
-    nights = parseInt($slickElement.find('[name="nights"]').val(), 10);
+    hotelIndex = $tileElement.find('[name="nights"]').val() || 0;
+    nights = parseInt($tileElement.find('[name="nights"]').val(), 10);
     hotelData = tripData[rowIndex].data.items[hotelIndex];
 
     price = hotelData.deals[0].price.formatted;
