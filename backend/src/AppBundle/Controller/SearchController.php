@@ -42,11 +42,11 @@ class SearchController extends Controller
         $hotels = $hotels->toArray();
 
         uasort($hotels, function (Hotel $a, Hotel $b) {
-            if ($a->getBestDeal()->getPrice() == $b->getBestDeal()->getPrice()) {
+            if ($this->formatPrice($a->getBestDeal()->getPrice()) == $this->formatPrice($b->getBestDeal()->getPrice())) {
                 return 0;
             }
 
-            return ($a->getBestDeal()->getPrice() < $b->getBestDeal()->getPrice()) ? -1 : 1;
+            return ($this->formatPrice($a->getBestDeal()->getPrice()) < $this->formatPrice($b->getBestDeal()->getPrice())) ? -1 : 1;
         });
 
         $locs = [];
@@ -56,5 +56,10 @@ class SearchController extends Controller
         }
 
         return $this->json(['items' => $locs]);
+    }
+
+    private function formatPrice($price)
+    {
+        return intval(trim($price, '€'));
     }
 }
