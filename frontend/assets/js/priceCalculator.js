@@ -1,16 +1,19 @@
 function getTotalPrice() {
-    return window.tripData.reduce(function (prev, curr) {
-        return prev + curr.price;
+    var price = window.tripStatus.reduce(function (prev, curr) {
+        return prev + curr.price * curr.nights;
     }, 0);
+
+    return price;
 }
 
 function postAjaxForPriceSave() {
-    var price = getTotalPrice;
+    var price = getTotalPrice();
+    var date = $('#startDate input').val();
 
     $.ajax({
         type: "POST",
-        url: 'http://tripvago.ga/kartoffel/api/price?start_date=2016-08-30&current_price=10000',
-        data: JSON.stringify(window.tripData),
+        url: 'http://tripvago.ga/kartoffel/api/price?start_date=' + date + '&current_price=' + price,
+        data: JSON.stringify(window.tripStatus),
         success: successPriceSave,
         dataType: 'json'
     });

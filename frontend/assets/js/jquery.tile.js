@@ -13,7 +13,8 @@ var updateStatus = function(rowIndex, data) {
   $('#totalPrice').html(totalPrice);
 
   console.log(window.tripStatus);
-}
+  $('body').trigger('kartoffel:data:loaded');
+};
 
 $('body').on('change', '.tile .input-wrapper input', function(event) {
   var $el = $(this);
