@@ -20,9 +20,16 @@ function postAjaxForPriceSave() {
 }
 
 function successPriceSave(retText) {
-    $('#savePriceText').html(retText);
+    var element = $('#savePriceText');
+    element.html(retText);
+
+    element.closest("price-suggest").addClass("active");
 }
 
 $('body').on('kartoffel:data:loaded', function () {
     postAjaxForPriceSave();
+});
+
+$('.price-suggest a.close').click(function() {
+    $(this).closest("price-suggest").removeClass("active");
 });
