@@ -90,29 +90,31 @@
     display: none
   }
 
-  .price-suggest {
-    position: absolute;
-    top:-30px;
-    padding:10px;
-    background-color: #FFFFFF;
-    border:1px solid rgba(0,0,0, 0.8);
-    color: #494949;
-    border-radius: 5px;
-    width:200px;
-    display: none;
-
-    .active {
-      display: block !important;
-
-      .glyphicon-repeat {
-        display: block !important
-      }
-    }
-  }
-
   #savePriceText {
     text-align: left;
   }
+}
+
+.price-suggest {
+  position: absolute;
+  top: 180px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  color: #494949;
+  border-radius: 5px;
+  width: 200px;
+  display: none;
+
+  .active {
+    .glyphicon-repeat {
+      display: block !important
+    }
+  }
+}
+
+.price-suggest.active {
+  display: block !important;
 }
 
 .gly-spin {

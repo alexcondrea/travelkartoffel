@@ -43,5 +43,5 @@ $('body').on('kartoffel:data:loaded', function () {
 });
 
 $('.price-suggest a.close').click(function() {
-    $(this).closest("price-suggest").removeClass("active");
+    $(this).closest(".price-suggest").removeClass("active");
 });
