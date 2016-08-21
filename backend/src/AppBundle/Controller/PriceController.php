@@ -2,19 +2,27 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Model\HotelsSteps;
+use AppBundle\Utils\ArrayUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class PriceController extends Controller
 {
     /**
      * @Route("/kartoffel/api/price")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $price = $this->get('trivago.price_calculator')->getHotelPriceForRange('Berlin', new \DateTime(), 5);
+        $date = $request->query->get('start_date', (new \DateTime())->format('Y-m-d'));
+        $startDate = date_create_from_format('Y-m-d', $date);
 
-        echo $price; exit;
+        $prices = $this->get('trivago.step_calculator')->getPriceCalculation($startDate, HotelsSteps::fromArray(
+            current($this->getStorage())['steps']
+        ));
+
+        return $this->json(json_decode($this->get('serializer')->serialize($prices, 'json'), true));
     }
 
     /**

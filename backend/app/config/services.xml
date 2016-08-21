@@ -28,6 +28,10 @@
         <service class="AppBundle\Calculator\PriceCalculator" id="trivago.price_calculator">
             <argument type="service" id="trivago.api_workaround"/>
         </service>
+
+        <service class="AppBundle\Calculator\StepCalculator" id="trivago.step_calculator">
+            <argument id="trivago.price_calculator" type="service"/>
+        </service>
     </services>
 
 </container>

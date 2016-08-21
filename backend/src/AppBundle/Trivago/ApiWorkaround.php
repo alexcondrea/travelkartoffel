@@ -17,6 +17,8 @@ use Trivago\Tas\Tas;
  */
 class ApiWorkaround
 {
+    const CACHE_LIFETIME = 3600;
+
     /**
      * @var Tas
      */
@@ -53,7 +55,7 @@ class ApiWorkaround
             $result = $this->tas->getHotelCollection($request);
             if(count($result) != 0) {
                 $this->cacheItemPool->save(
-                    $cache->set($result)->expiresAfter(300)
+                    $cache->set($result)->expiresAfter(self::CACHE_LIFETIME)
                 );
 
                 return $result;
@@ -75,7 +77,7 @@ class ApiWorkaround
             $result = $this->tas->getLocations($request);
             if (count($result) != 0) {
                 $this->cacheItemPool->save(
-                    $cache->set($result)->expiresAfter(300)
+                    $cache->set($result)->expiresAfter(self::CACHE_LIFETIME)
                 );
                 return $result;
             }
