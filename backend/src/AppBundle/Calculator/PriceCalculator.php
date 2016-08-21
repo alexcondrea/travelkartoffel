@@ -35,11 +35,13 @@ class PriceCalculator
     {
         $location = $this->apiWorkaround->getLocations(new LocationsRequest($city))->current();
 
+        $dateTime = clone $start;
+
         $request = new HotelCollectionRequest([
             HotelCollectionRequest::PATH => $location->getPathId(),
             HotelCollectionRequest::START_DATE => $start,
             HotelCollectionRequest::CURRENCY => 'EUR',
-            HotelCollectionRequest::END_DATE => (clone $start)->modify('+' . $nights . ' days'),
+            HotelCollectionRequest::END_DATE => $dateTime->modify('+' . $nights . ' days'),
         ]);
 
         try {

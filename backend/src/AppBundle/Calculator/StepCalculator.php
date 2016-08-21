@@ -57,12 +57,14 @@ class StepCalculator
                 $price = $this->priceCalculator
                     ->getHotelPriceForRange($locationStep->getLocation(), $stepStart, $locationStep->getNights());
 
+                $dateTime = clone $stepStart;
+
                 $result['steps'][] = [
                     'location' => $locationStep->getLocation(),
                     'nights' => $locationStep->getNights(),
                     'price' => $price,
                     'start' => $stepStart->format('Y-m-d'),
-                    'end' => (clone $stepStart)->modify('+ ' . $locationStep->getNights() . ' days')->format('Y-m-d'),
+                    'end' => $dateTime->modify('+ ' . $locationStep->getNights() . ' days')->format('Y-m-d'),
                 ];
 
 
