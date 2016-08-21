@@ -8,6 +8,7 @@ $('.glyphicon-heart').on('click', function(event) {
 });
 
 $('.loginmodal-submit').on('click', function (event) {
+    event.preventDefault();
     setTimeout(function () {
         $('#loginModal').modal('hide');
         $('#btn-login').text('Potato');
