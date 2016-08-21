@@ -2,13 +2,22 @@
   width: 200px;
   height: 200px;
 
-  background-size: 200px 200px;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
 
+  background-size: 200px 200px;
   pointer-events: none;
 
-
+  &.is-empty,
+  &.is-active,
   &.slick-current {
     pointer-events: all;
+  }
+
+  .part1,
+  .part2 {
+    display: none !important;
   }
 
   h6 {
@@ -38,6 +47,7 @@
 
   h6 {
     margin-top: 10px;
+    padding: 0 10px;
   }
 
   .night-wrapper {
@@ -47,6 +57,7 @@
     input {
       position: absolute;
       top: 6px;
+      left: 0;
     }
   }
 
@@ -60,15 +71,6 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-  }
-
-  .rating-row {
-    justify-content: center;
-
-    h4 {
-      width: auto;
-      margin-left: 20px;
-    }
   }
 
   .glyphicon {
@@ -131,4 +133,21 @@
       display: none;
     }
   }
+
+  .rating-row {
+    justify-content: center;
+
+    h4 {
+      width: auto;
+      margin-left: 20px;
+    }
+  }
+
+  &.slick-current {
+      .part1,
+      .part2 {
+        display: flex !important;
+      }
+  }
+
 }

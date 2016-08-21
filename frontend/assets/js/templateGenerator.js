@@ -1,5 +1,21 @@
-var colIndex = 0;
+window.locationData = [];
+window.tripData = [];
+window.tripStatus = [];
 
+var initSlick = function(selector) {
+    $(selector).slick({
+        centerMode: true,
+        centerPadding: '200px',
+        slidesToShow: 3,
+        focusOnSelect: true,
+        slidesToScroll: 1,
+        arrows: false,
+        infinite: false,
+        speed: 100,
+        vertical: true,
+        verticalSwiping: true
+    });
+}
 
 var getRatingClass = function(value) {
     var rc = 0;
@@ -21,52 +37,76 @@ var tileSource = $("#tile-template").html();
 var tiletemplate = Handlebars.compile(tileSource);
 
 
-function getTrivagoColor() {
+function getTrivagoColor(index) {
     var colors = [
         "rgb(244, 143, 0)",
         "rgb(0, 127, 175)",
         "rgb(201, 74, 56)"
     ]
-    if (colIndex < 2) {
-        colIndex++;
-    } else {
-        colIndex = 0;
-    }
-    return colors[colIndex];
+
+    return colors[index];
 }
 
-function fillColumn(locationId, startDate, endDate) {
+function fillColumn(locationId, startDate, endDate, index, done) {
     var url = "http://tripvago.ga/kartoffel/api/search/hotel-collection?path=" + locationId + "&start_date=" + startDate + "&end_date=" + endDate
 
     var source = $("#tile-template").html();
     var template = Handlebars.compile(source);
 
-    var $tmp = $('<div class="slick center col-md-2 col-md-offset-0"></div>');
+    var $tmp = $('<div style="width: 230px; height: 230px;"></div>');
     $.getJSON(url, function function_name(data) {
 
-        data.items.forEach(function(item) {
+        var $container = $('.hotel-collection-result .slick-wrapper .slick').eq(index);
+        var nights = parseInt($container.find('[name="nights"]').val(), 10);
+        var hotelData = {};
+
+        tripData[index] = {
+            hotelId: null,
+            data: data
+        };
+
+        data.items.forEach(function(item, index) {
             var info = {
+                hotelIndex: index,
                 hotelName: item.name,
                 locationName: item.city,
-                nights: 3,
+                nights: nights,
                 rating: getRatingClass(item.ratingValue),
                 imageUrl: item.mainImage.extraLarge,
                 priceFormatte: item.deals[0].price.formatted,
                 stars: 'star_' + item.category
             };
 
-            var context = {
-                locationName: "Berlin",
-                nights: "2",
-                stars: "4",
-                rating: "10",
-                priceFormat: "100€"
-            };
             var html = template(info);
 
             $tmp.append(html);
         });
-        $('.hotel-collection-result').append($tmp);
+
+        $container
+            .removeAttr('class')
+            .addClass('center slick col-md-12 slick-' + index)
+            .html($tmp.html());
+
+        var price = 0;
+
+        try {
+            price = data.items[0].deals[0].price.formatted.replace('€', '');
+            price = parseInt(price, 10);
+        } catch (ex) {
+            price = 99;
+        }
+
+        hotelData = {
+            price: price,
+            hotelIndex: 0,
+            nights: nights,
+            location: window.locationData[index].nameFormatted,
+            pathId: window.locationData[index].pathId
+        };
+
+        updateStatus(index, hotelData);
+
+        done();
     });
 }
 
@@ -84,37 +124,24 @@ window.addEventListener("keydown", function(e) {
 }, false);
 
 var fillInital = function() {
-    var AMOUNT = 11;
-    var ROWS = 2;
+    var ROWS = 3;
     var i = 0;
-    var k = 0;
-
     var source = $('#tile-template-empty').html();
     var emptyTile = Handlebars.compile(source);
     var $item = emptyTile();
     var $tmp = '';
 
-    for (i = 0; i < ROWS; i++) {
-        $tmp = $('<div class="slick center col-md-12" style="width: 230px; height: 230px;"></div>');
-        for (k = 0; k < AMOUNT; k++) {
-            $tmp.append($item);
-        }
-        $('.hotel-collection-result .slick-wrapper').append($tmp);
+    for(i = 0; i < ROWS; i++) {
+        $tmp = $('<div />').html($item);
+        $tmp.find('.tile').attr('style', 'background-color: ' + getTrivagoColor(i) + ';');
+        $item =  $tmp.html();
+
+        $('.hotel-collection-result .slick-wrapper')
+            .append('<div class="slick center col-md-12 slick-'+i+'" style="width: 230px; height: 230px;">' + $item + '</div>');
     }
-    $('.hotel-collection-result .tile:last').removeClass('is-active');
+    $('.hotel-collection-result .tile:first').addClass('is-active');
 };
-fillColumn("8514", "2016-08-20", "2016-08-25");
+
 fillInital();
 
-$('.center').slick({
-    centerMode: true,
-    centerPadding: '200px',
-    slidesToShow: 3,
-    focusOnSelect: true,
-    slidesToScroll: 1,
-    arrows: false,
-    infinite: false,
-    speed: 100,
-    vertical: true,
-    verticalSwiping: true
-});
+initSlick('.center');

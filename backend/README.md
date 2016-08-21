@@ -38,7 +38,7 @@ http://tripvago.ga/kartoffel/api/storage
 http://tripvago.ga/kartoffel/api/storage/berlin-leipzig-dortmund
 ```
 
-### Price Route Calulation
+### Price Route Calculation
 
 Try to found a cheapest hotel route combination
 
@@ -233,4 +233,34 @@ http://tripvago.ga/kartoffel/api/price?start_date=2016-08-30
     }
   ]
 }
+```
+
+### Price route save up
+
+HTML callback to get price save up on a recombined route 
+
+```
+[POST] http://tripvago.ga/kartoffel/api/price?start_date=2016-08-30&current_price=10
+```
+
+Content to post
+```
+[
+      {
+        "location": "Berlin",
+        "nights": 1
+      },
+      {
+        "location": "Freiburg",
+        "nights": 3
+      },
+      {
+        "location": "Duisburg",
+        "nights": 6
+      }
+]
+```
+
+```
+Be flexible and save some money: Recombine your steps to Dortmund, Berlin, Leipzig and save up to 235 €
 ```

@@ -3,10 +3,6 @@
 @link-color: #f6a03a;
 @link-color-hover: lighten(@link-color, 50%);
 
-
-.navbar-collapse  {
-  box-shadow: 0px 10px 20px rgba(41,51,57,.5) !important;
-}
 .navbar-default {
   border: none;
   margin-bottom: 0;
@@ -27,10 +23,9 @@
     color: #F47A6B;
   }
 }
-.bg-grey{
-background-color: #37454d;
-}
+
 .hotel-collection-result {
+  background-color: #EBECEE;
   padding: 15px 0;
 
   height: 520px;
@@ -49,17 +44,8 @@ background-color: #37454d;
   padding: 15px 0;
 }
 
-.flex-row .price,
-.flex-row .night,
-.star-wrapper .star,
-.flex-row h5,
-.hotel-collection-result h6 {
-  text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.95);
-}
-
 .rating div {
   border-radius: 3px;
-  box-shadow: 4px 4px 9px 0 rgba(0, 0, 0, 0.75);
 }
 
 .navbar .slogan {
@@ -68,6 +54,51 @@ background-color: #37454d;
   color: #0279AD;
 }
 
-#footer {
-  background-color: #ebecee;
+.total-box {
+  color: white;
+  background-color: #37464D;
+  text-align: center;
+  padding: 30px 0;
+  position: relative;
+
+  p {
+    line-height: 1.01em;
+  }
+
+  .total-text {
+    font-size: 14px;
+  }
+
+  .total-price,
+  .total-nights {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .btn-success {
+    box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.55);
+    background-color: #66A401;
+    width: 140px;
+  }
+
+  .price-suggest {
+    position: absolute;
+    top:-30px;
+    padding:10px;
+    background-color: #FFFFFF;
+    border:1px solid rgba(0,0,0, 0.8);
+    color: #494949;
+    border-radius: 5px;
+    width:200px;
+    display: none;
+
+    .active {
+      display: block !important;
+    }
+  }
+
+  #savePriceText {
+    text-align: left;
+  }
+
 }

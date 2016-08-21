@@ -41,4 +41,12 @@ class Step
     {
         return $this->nights;
     }
+
+    /**
+     * @return string
+     */
+    public function getHash()
+    {
+        return md5($this->nights . $this->location);
+    }
 }

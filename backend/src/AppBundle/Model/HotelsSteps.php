@@ -54,6 +54,16 @@ class HotelsSteps
     }
 
     /**
+     * @return array<string>
+     */
+    public function getHash()
+    {
+        return implode(',', array_map(function (Step $step) {
+            return $step->getHash();
+        }, $this->steps));
+    }
+
+    /**
      * @param array $data
      * @return static
      */

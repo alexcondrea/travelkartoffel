@@ -31,6 +31,7 @@
 
         <service class="AppBundle\Calculator\StepCalculator" id="trivago.step_calculator">
             <argument id="trivago.price_calculator" type="service"/>
+            <argument type="service" id="cache.app"/>
         </service>
     </services>
 
