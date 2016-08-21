@@ -60,7 +60,7 @@ $('body').on('click', '.tile button[data-role="activate"]', function(event) {
   var $tile = $el.closest('.tile');
 
   $tile.addClass('is-active');
-  $tile.find('input').eq(0).focus();
+  $tile.find('.tt-input').focus();
 });
 
 
