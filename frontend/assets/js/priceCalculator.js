@@ -14,8 +14,7 @@ function postAjaxForPriceSave() {
         type: "POST",
         url: 'http://tripvago.ga/kartoffel/api/price?start_date=' + date + '&current_price=' + price,
         data: JSON.stringify(window.tripStatus),
-        success: successPriceSave,
-        dataType: 'json'
+        success: successPriceSave
     });
 }
 
@@ -23,7 +22,7 @@ function successPriceSave(retText) {
     var element = $('#savePriceText');
     element.html(retText);
 
-    element.closest("price-suggest").addClass("active");
+    element.closest(".price-suggest").addClass("active");
 }
 
 $('body').on('kartoffel:data:loaded', function () {
