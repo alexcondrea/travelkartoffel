@@ -76,7 +76,7 @@ function fillColumn(locationId, startDate, endDate, index, done) {
         $('.hotel-collection-result .slick-wrapper .slick').eq(index)
             .removeAttr('class')
             .addClass('center slick col-md-12 slick-' + index)
-            .html($tmp);
+            .html($tmp.html());
 
         console.log($('.hotel-collection-result .slick-wrapper .slick').eq(index).html());
         done();
