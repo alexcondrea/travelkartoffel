@@ -41,7 +41,7 @@ class PriceController extends Controller
         $bestStep = $prices->getBestStep();
 
         if($bestStep['price'] >= $price) {
-            throw $this->createNotFoundException('No price improvements found');
+            return $this->render('price/ajax-success.html.twig');
         }
 
         return $this->render('price/ajax.html.twig', [
