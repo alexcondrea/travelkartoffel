@@ -105,8 +105,6 @@ function fillColumn(locationId, startDate, endDate, index, done) {
         };
 
         updateStatus(index, hotelData);
-
-        initTypeahead( $('.hotel-collection-result .slick-wrapper .slick:nth-child(' + (1 + index) +') .typeahead') );
         done();
     });
 }

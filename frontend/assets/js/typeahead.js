@@ -1,17 +1,3 @@
-var initTypeahead = function(selector) {
-    $(selector).typeahead({
-        hint: true,
-        highlight: true,
-        minLength: 1
-    }, {
-        display: 'location',
-        templates: {
-            suggestion: Handlebars.compile('<span></span>')
-        },
-        source: placesToVisit
-    });
-}
-
 var placesToVisit = new Bloodhound({
     datumTokenizer: function(datum) {
         return Bloodhound.tokenizers.whitespace(datum.value);
@@ -34,4 +20,29 @@ var placesToVisit = new Bloodhound({
     }
 });
 
-initTypeahead('.typeahead');
+var typeaheadOptions = {
+    hint: true,
+    highlight: true,
+    minLength: 1
+};
+var typeaheadDatasets = {
+    display: 'location',
+    templates: {
+        suggestion: Handlebars.compile('<span></span>')
+    },
+    source: placesToVisit
+};
+
+ComponentManager.register(
+    'typeahead',
+    function(node) {
+        $(node).typeahead(typeaheadOptions, typeaheadDatasets);
+    },
+    function(node) {
+        $(node).typeahead('destroy');
+    }
+);
+
+$('.typeahead').typeahead(typeaheadOptions, typeaheadDatasets);
+
+ComponentManager.init();
